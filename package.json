@@ -1,0 +1,16 @@
+{
+  "name": "zotero-researchhub",
+  "version": "1.0.0",
+  "description": "Research productivity toolkit for Zotero - check-in, pomodoro, AI writing assistant, translation, and more",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "package": "node scripts/build.mjs --package"
+  },
+  "dependencies": {
+    "zotero-plugin-toolkit": "^4.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.0",
+    "zotero-types": "^3.0.0"
+  }
+}
