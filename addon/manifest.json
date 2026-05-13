@@ -4,15 +4,16 @@
   "version": "1.0.0",
   "description": "科研效率工具箱 — 打卡、番茄钟、AI 写作润色、翻译、邮件模板、LaTeX 片段、作图技巧等",
   "homepage_url": "https://github.com/WCG0726/zotero-researchhub",
+  "author": "WCG0726",
   "icons": {
-    "48": "chrome/content/icons/icon.svg",
-    "96": "chrome/content/icons/icon.svg"
+    "48": "chrome/content/icons/icon48.png",
+    "96": "chrome/content/icons/icon96.png"
   },
-  "applications": {
+  "browser_specific_settings": {
     "zotero": {
       "id": "zotero-researchhub@wcg0726.github.io",
       "strict_min_version": "9.0.0",
-      "strict_max_version": "10*.*"
+      "strict_max_version": "10.*.*"
     }
   }
 }
