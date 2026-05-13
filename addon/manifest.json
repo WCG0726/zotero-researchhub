@@ -2,18 +2,16 @@
   "manifest_version": 2,
   "name": "ResearchHub",
   "version": "1.0.0",
-  "description": "科研效率工具箱 — 打卡、番茄钟、AI 写作润色、翻译、邮件模板、LaTeX 片段、作图技巧等（支持 Zotero 7/8/9）",
-  "homepage_url": "https://github.com/wcg0726/zotero-researchhub",
+  "description": "科研效率工具箱 — 打卡、番茄钟、AI 写作润色、翻译、邮件模板、LaTeX 片段、作图技巧等",
+  "homepage_url": "https://github.com/WCG0726/zotero-researchhub",
   "icons": {
-    "48": "chrome/content/icons/icon.png",
-    "96": "chrome/content/icons/icon@2x.png"
+    "48": "chrome/content/icons/icon.svg",
+    "96": "chrome/content/icons/icon.svg"
   },
   "applications": {
     "zotero": {
       "id": "zotero-researchhub@wcg0726.github.io",
-      "update_url": "https://raw.githubusercontent.com/wcg0726/zotero-researchhub/main/update.json",
-      "strict_min_version": "7.0.0",
-      "strict_max_version": "9.0.*"
+      "strict_min_version": "7.0.0"
     }
   }
 }
