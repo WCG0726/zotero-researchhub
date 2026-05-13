@@ -1,16 +1,32 @@
 {
   "name": "zotero-researchhub",
   "version": "1.0.0",
-  "description": "Research productivity toolkit for Zotero - check-in, pomodoro, AI writing assistant, translation, and more",
+  "type": "module",
+  "description": "科研效率工具箱 — 打卡、番茄钟、AI 写作润色、翻译、邮件模板、LaTeX 片段、作图技巧等",
+  "author": "WCG0726",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WCG0726/zotero-researchhub.git"
+  },
+  "homepage": "https://github.com/WCG0726/zotero-researchhub",
+  "config": {
+    "addonName": "ResearchHub",
+    "addonID": "zotero-researchhub@wcg0726.github.io",
+    "addonRef": "researchhub",
+    "addonInstance": "ResearchHub",
+    "prefsPrefix": "extensions.zotero-researchhub"
+  },
   "scripts": {
-    "build": "node scripts/build.mjs",
-    "package": "node scripts/build.mjs --package"
+    "start": "zotero-plugin serve",
+    "build": "zotero-plugin build",
+    "release": "zotero-plugin release"
   },
   "dependencies": {
-    "zotero-plugin-toolkit": "^4.0.0"
+    "zotero-plugin-toolkit": "^5.1.0-beta.13"
   },
   "devDependencies": {
-    "esbuild": "^0.20.0",
-    "zotero-types": "^3.0.0"
+    "zotero-plugin-scaffold": "^0.8.2",
+    "zotero-types": "^4.1.0-beta.4",
+    "typescript": "^5.8.0"
   }
 }

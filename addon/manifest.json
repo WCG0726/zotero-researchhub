@@ -1,17 +1,17 @@
 {
   "manifest_version": 2,
-  "name": "ResearchHub",
-  "version": "1.0.0",
-  "description": "科研效率工具箱 — 打卡、番茄钟、AI 写作润色、翻译、邮件模板、LaTeX 片段、作图技巧等",
-  "homepage_url": "https://github.com/WCG0726/zotero-researchhub",
-  "author": "WCG0726",
+  "name": "__addonName__",
+  "version": "__buildVersion__",
+  "description": "__description__",
+  "homepage_url": "__homepage__",
+  "author": "__author__",
   "icons": {
     "48": "chrome/content/icons/icon48.png",
     "96": "chrome/content/icons/icon96.png"
   },
   "applications": {
     "zotero": {
-      "id": "zotero-researchhub@wcg0726.github.io",
+      "id": "__addonID__",
       "strict_min_version": "6.999",
       "strict_max_version": "9999.*"
     }

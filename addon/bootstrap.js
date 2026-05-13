@@ -15,16 +15,16 @@ async function startup({ id, version, resourceURI, rootURI }, reason) {
   ].getService(Components.interfaces.amIAddonManagerStartup);
   var manifestURI = Services.io.newURI(rootURI + "manifest.json");
   chromeHandle = aomStartup.registerChrome(manifestURI, [
-    ["content", "researchhub", rootURI + "chrome/content/"],
-    ["locale", "researchhub", "zh-CN", rootURI + "locale/zh-CN/"],
-    ["locale", "researchhub", "en-US", rootURI + "locale/en-US/"],
+    ["content", "__addonRef__", rootURI + "chrome/content/"],
+    ["locale", "__addonRef__", "zh-CN", rootURI + "locale/zh-CN/"],
+    ["locale", "__addonRef__", "en-US", rootURI + "locale/en-US/"],
   ]);
 
   const ctx = { rootURI };
   ctx._globalThis = ctx;
 
   Services.scriptloader.loadSubScript(
-    `${rootURI}chrome/content/scripts/index.js`,
+    `${rootURI}chrome/content/scripts/__addonRef__.js`,
     ctx,
   );
   await Zotero.__addonInstance__.hooks.onStartup();

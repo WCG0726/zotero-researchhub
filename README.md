@@ -114,14 +114,14 @@
 # 安装依赖
 npm install
 
-# 开发构建（监听模式）
-npx esbuild src/index.ts --bundle --outfile=addon/chrome/content/scripts/index.js --target=firefox115 --format=iife --platform=browser --watch
+# 开发模式（热重载）
+npm start
 
 # 生产构建
-npx esbuild src/index.ts --bundle --outfile=addon/chrome/content/scripts/index.js --target=firefox115 --format=iife --platform=browser
+npm run build
 
-# 打包 .xpi
-npm run package
+# 发布
+npm run release
 ```
 
 ## 项目结构
@@ -160,7 +160,8 @@ zotero-researchhub/
 ## 技术栈
 
 - **TypeScript** — 类型安全的源码
-- **esbuild** — 快速打包（Firefox 115 目标）
+- **zotero-plugin-scaffold** — 标准化构建（esbuild + XPI 打包 + 模板变量）
+- **zotero-plugin-toolkit** — Zotero API 封装
 - **Zotero Plugin API** — 原生集成
 - **Fetch API** — AI 接口调用（支持流式输出）
 - **Zotero.File** — 本地 JSON 文件持久化
