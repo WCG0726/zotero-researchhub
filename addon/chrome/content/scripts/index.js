@@ -2772,39 +2772,57 @@ for name, data in datasets:
   }
 
   // src/index.ts
-  Zotero.ResearchHub = {
-    onStartup({ id, version, rootURI }) {
-      Zotero.debug("[ResearchHub] Plugin starting...");
-      const doc = Zotero.getMainWindow().document;
-      const toolsMenu = doc.getElementById("menu_ToolsPopup");
-      if (toolsMenu) {
-        const menuitem = doc.createXULElement ? doc.createXULElement("menuitem") : doc.createElement("menuitem");
-        menuitem.id = "researchhub-menu-item";
-        menuitem.setAttribute("label", "ResearchHub");
-        menuitem.setAttribute("tooltiptext", "\u6253\u5F00 ResearchHub \u79D1\u7814\u5DE5\u5177\u7BB1");
-        menuitem.addEventListener("command", () => openDialog());
-        toolsMenu.appendChild(menuitem);
-      }
-      const keyset = doc.getElementById("mainKeyset") || doc.querySelector("keyset");
-      if (keyset) {
-        const key = doc.createXULElement ? doc.createXULElement("key") : doc.createElement("key");
-        key.id = "researchhub-key";
-        key.setAttribute("key", "R");
-        key.setAttribute("modifiers", "accel,shift");
-        key.setAttribute("oncommand", "");
-        key.addEventListener("command", () => openDialog());
-        keyset.appendChild(key);
-      }
-      Zotero.debug("[ResearchHub] Plugin started successfully");
-    },
-    onShutdown() {
-      Zotero.debug("[ResearchHub] Plugin shutting down...");
-      closeDialog();
-      const doc = Zotero.getMainWindow()?.document;
-      if (doc) {
+  var plugin = {
+    id: "zotero-researchhub@wcg0726.github.io",
+    version: "1.0.0",
+    rootURI: "",
+    hooks: {
+      onStartup() {
+        Zotero.debug("[ResearchHub] Plugin starting...");
+      },
+      onMainWindowLoad(window) {
+        Zotero.debug("[ResearchHub] Main window loaded");
+        const doc = window.document;
+        const toolsMenu = doc.getElementById("menu_ToolsPopup");
+        if (toolsMenu) {
+          const menuitem = doc.createXULElement ? doc.createXULElement("menuitem") : doc.createElement("menuitem");
+          menuitem.id = "researchhub-menu-item";
+          menuitem.setAttribute("label", "ResearchHub");
+          menuitem.setAttribute("tooltiptext", "\u6253\u5F00 ResearchHub \u79D1\u7814\u5DE5\u5177\u7BB1");
+          menuitem.addEventListener("command", () => openDialog());
+          toolsMenu.appendChild(menuitem);
+        }
+        const keyset = doc.getElementById("mainKeyset") || doc.querySelector("keyset");
+        if (keyset) {
+          const key = doc.createXULElement ? doc.createXULElement("key") : doc.createElement("key");
+          key.id = "researchhub-key";
+          key.setAttribute("key", "R");
+          key.setAttribute("modifiers", "accel,shift");
+          key.setAttribute("oncommand", "");
+          key.addEventListener("command", () => openDialog());
+          keyset.appendChild(key);
+        }
+        Zotero.debug("[ResearchHub] Main window UI initialized");
+      },
+      onMainWindowUnload(window) {
+        Zotero.debug("[ResearchHub] Main window unloading");
+        const doc = window.document;
         doc.getElementById("researchhub-menu-item")?.remove();
         doc.getElementById("researchhub-key")?.remove();
+      },
+      onShutdown() {
+        Zotero.debug("[ResearchHub] Plugin shutting down...");
+        closeDialog();
+        const windows = Zotero.getMainWindows();
+        for (const win of windows) {
+          const doc = win.document;
+          doc.getElementById("researchhub-menu-item")?.remove();
+          doc.getElementById("researchhub-key")?.remove();
+        }
+        Zotero.__addonInstance__ = void 0;
+        Zotero.debug("[ResearchHub] Plugin shut down complete");
       }
     }
   };
+  Zotero.__addonInstance__ = plugin;
 })();

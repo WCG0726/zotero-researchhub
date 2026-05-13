@@ -11,7 +11,8 @@
   "applications": {
     "zotero": {
       "id": "zotero-researchhub@wcg0726.github.io",
-      "strict_min_version": "7.0.0"
+      "strict_min_version": "9.0.0",
+      "strict_max_version": "10*.*"
     }
   }
 }

@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+
 var chromeHandle;
 
 function install(data, reason) {}
@@ -6,31 +7,58 @@ function install(data, reason) {}
 async function startup({ id, version, resourceURI, rootURI }, reason) {
   await Zotero.initializationPromise;
 
-  // Register chrome
-  const aomStartup = Components.classes[
+  if (!rootURI) {
+    rootURI = resourceURI.spec;
+  }
+
+  var aomStartup = Components.classes[
     "@mozilla.org/addons/addon-manager-startup;1"
-  ]?.getService(Components.interfaces.amIAddonManagerStartup);
-  const manifestURI = Services.io.newURI(rootURI + "manifest.json");
-  chromeHandle = aomStartup?.registerChrome(manifestURI, [
+  ].getService(Components.interfaces.amIAddonManagerStartup);
+  var manifestURI = Services.io.newURI(rootURI + "manifest.json");
+  chromeHandle = aomStartup.registerChrome(manifestURI, [
     ["content", "researchhub", rootURI + "chrome/content/"],
     ["locale", "researchhub", "zh-CN", rootURI + "locale/zh-CN/"],
     ["locale", "researchhub", "en-US", rootURI + "locale/en-US/"],
   ]);
 
-  // Load the main script
-  Services.scriptloader.loadSubScript(
-    rootURI + "chrome/content/scripts/index.js"
-  );
+  const ctx = {
+    rootURI,
+  };
+  ctx._globalThis = ctx;
 
-  // Call the plugin startup
-  Zotero.ResearchHub.onStartup({ id, version, rootURI });
+  Services.scriptloader.loadSubScript(
+    `${rootURI}/chrome/content/scripts/index.js`,
+    ctx,
+  );
+  Zotero.__addonInstance__.hooks.onStartup();
+}
+
+async function onMainWindowLoad({ window }, reason) {
+  Zotero.__addonInstance__?.hooks.onMainWindowLoad(window);
+}
+
+async function onMainWindowUnload({ window }, reason) {
+  Zotero.__addonInstance__?.hooks.onMainWindowUnload(window);
 }
 
 function shutdown({ id, version, resourceURI, rootURI }, reason) {
-  Zotero.ResearchHub?.onShutdown();
-  Zotero.ResearchHub = undefined;
+  if (reason === APP_SHUTDOWN) {
+    return;
+  }
 
-  // Unregister chrome
+  if (typeof Zotero === "undefined") {
+    Zotero = Components.classes["@zotero.org/Zotero;1"].getService(
+      Components.interfaces.nsISupports,
+    ).wrappedJSObject;
+  }
+  Zotero.__addonInstance__?.hooks.onShutdown();
+
+  Cc["@mozilla.org/intl/stringbundle;1"]
+    .getService(Components.interfaces.nsIStringBundleService)
+    .flushBundles();
+
+  Cu.unload(`${rootURI}/chrome/content/scripts/index.js`);
+
   if (chromeHandle) {
     chromeHandle.destruct();
     chromeHandle = null;
