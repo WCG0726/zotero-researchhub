@@ -1,13 +1,15 @@
-# ResearchHub - Zotero 7 科研效率插件
+# ResearchHub - Zotero 科研效率插件
 
-一款面向科研人员的 Zotero 7 侧边栏插件，集成打卡、番茄钟、AI 写作润色、翻译、邮件模板、作图技巧、LaTeX 片段等功能。
+一款面向科研人员的 Zotero 侧边栏插件（支持 Zotero 7/8/9），集成打卡、番茄钟、AI 写作润色、翻译、邮件模板、作图技巧、LaTeX 片段等功能。
 
 ## 安装
 
-1. 从 [Releases](https://github.com/wcg0726/zotero-researchhub/releases) 下载最新的 `.xpi` 文件
-2. 在 Zotero 7 中：**工具 → 附加组件 → 齿轮图标 → 从文件安装附加组件**
+1. 从 [Releases](https://github.com/WCG0726/zotero-researchhub/releases) 下载最新的 `.xpi` 文件
+2. 在 Zotero 中：**工具 → 附加组件 → 齿轮图标 → 从文件安装附加组件**
 3. 选择下载的 `.xpi` 文件
 4. 安装后通过 **工具 → ResearchHub** 打开，或使用快捷键 `Ctrl+Shift+R`
+
+> 支持 Zotero 7、Zotero 8、Zotero 9
 
 ## 功能概览
 
