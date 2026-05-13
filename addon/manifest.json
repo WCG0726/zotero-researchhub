@@ -9,11 +9,11 @@
     "48": "chrome/content/icons/icon48.png",
     "96": "chrome/content/icons/icon96.png"
   },
-  "browser_specific_settings": {
+  "applications": {
     "zotero": {
       "id": "zotero-researchhub@wcg0726.github.io",
-      "strict_min_version": "9.0.0",
-      "strict_max_version": "10.*.*"
+      "strict_min_version": "6.999",
+      "strict_max_version": "9999.*"
     }
   }
 }
